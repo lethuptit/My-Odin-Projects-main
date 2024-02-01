@@ -109,7 +109,7 @@
   .form-input {
     display: flex;
     flex-flow: column wrap;
-    width: 45%;
+    width: 40%;
     font-size: 0.7rem;
     text-transform: uppercase;
     opacity: 50%;
@@ -155,5 +155,6 @@
   .error_message{
     color: rgb(143, 13, 13);
     font-size: 12px;
+    width: 90%;
 
   }
