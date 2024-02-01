@@ -109,7 +109,7 @@
   .form-input {
     display: flex;
     flex-flow: column wrap;
-    width: 40%;
+    width: 45%;
     font-size: 0.7rem;
     text-transform: uppercase;
     opacity: 50%;
