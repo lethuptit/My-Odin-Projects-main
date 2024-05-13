@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="DynamicSelect.css" />
     <title>Library</title>
 </head>
 
@@ -48,6 +49,13 @@
                         Cancel
                     </button>
                 </div>
+                <div>
+                <select id="country" name="country" data-placeholder="Select a country" data-dynamic-select>
+                    <option value="United States" data-img="flags/us.png">United States</option>
+                    <option value="United Kingdom" data-img="flags/uk.png">United Kingdom</option>
+                    <option value="Japan" data-img="flags/ja.png">Japan</option>
+                </select>
+            </div>
             </div>
         </div>
     </div>
@@ -55,6 +63,7 @@
     <div class="mainLibrary">        
     </div>
     <script src="myBook.js"></script>
+    <script src="DynamicSelect.js"></script>
 </body>
 
 </html>

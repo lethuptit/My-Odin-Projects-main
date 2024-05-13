@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Select a Language</title>
+    <style>
+        .dropbtn {
+            background-color: orange;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropText {
+            display: none;
+            position: absolute;
+            background-color: skyblue;
+            min-width: 120px;
+            z-index: 1;
+        }
+
+        .dropText a {
+            color: black;
+            padding: 12px 25px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropText a:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .dropdown:hover .dropText {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: yellow;
+        }
+    </style>
+    <style>
+        details summary,
+        ul {
+            list-style: none;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+            /* special fix, required just for Safari */
+        }
+
+        details ul {
+            position: absolute;
+            background: lightgrey;
+            box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+            margin-top: -10px;
+            padding: 10px;
+        }
+
+        details li {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        details li:hover {
+            background: rgba(255, 255, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Programming Language</h1>
+    <div class="dropdown">
+        <button class="dropbtn">
+            Select any one language
+        </button>
+        <div class="dropText" onclick="selectStatus()">
+            <a href="#">
+                <img src="https://www.tutorialspoint.com/cg/images/cg_python.png" width="20" height="20"> Python</a>
+            <a href="#"><img src="https://www.tutorialspoint.com/cg/images/cg_java.png" width="20" height="20">Java</a>
+            <a href="#"><img src="https://www.tutorialspoint.com/cg/images/cg_c++.png" width="20" height="20">C+</a>
+            <a href="#">
+        </div>
+    </div>
+
+    <details>
+        <summary class="summary"><img src='./images/icons8-moleskine-94.png' /> Testing</summary>
+        <ul onclick="selectStatus()" class="chosing-list">
+            <li><img src='./images/icons8-book-shelf-94.png' /> Test 1</li>
+            <li><img src='./images/icons8-delete.svg' /> Test 2</li>
+        </ul>
+    </details>
+
+    <script>
+        function selectStatus() {
+
+            dropbtn = document.querySelector(".summary")
+            dropText = document.querySelector(".chosing-list")
+            dropbtn.textContent = dropText[selected]
+        }
+        $('li').click(function (e) {
+
+            console.log(e.target.innerHTML);
+            dropbtn = document.querySelector(".summary")
+            dropText = document.querySelector(".chosing-list")
+            dropbtn.textContent = dropText[selected]
+        })
+    </script>
+</body>
+
+</html>

@@ -243,24 +243,23 @@ input:focus {
   background-size: 90%; */
   row-gap: 0px;
   border: 4px transparent;
-  border-radius: 25% 10%;
+  border-left: 5px solid rgb(5, 193, 250);
+  border-radius: 20px;
   justify-content: space-around;
   box-shadow: 0px 6px 6px 0px rgb(32, 32, 32);
   transition: 0.3s transform ease;
-  overflow: auto;
+  overflow: hidden;
   /* Add this line */
 }
 .card:hover {
   transform: scale(1.05);
 }
-.card>img,
 .card>h2,
-.card>p,
+.card>p, 
 .card>div {
   /* border: 1px solid red; */
   margin: 0px 5px 0px 0px;
-  padding-top: 5px;
-  border: 1px solid red;
+  padding-top: 5px;  
 }
 .book-image-container {
   display: flex;
@@ -279,14 +278,17 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid red;
+  padding-left: 10px;
+  /* border: 1px solid red; */
 }
 
 .toggle-read-container{
   display: flex;
   align-items: center;
 }
-
+select#gender option[value="male"]   { background-image:url(./images/1520624981944.png);   }
+select#gender option[value="female"] { background-image:url(./images/icons8-open-book-emoji-48.png); }
+select#gender option[value="others"] { background-image:url(others.png); }
 
 .backdrop {
   position: fixed;

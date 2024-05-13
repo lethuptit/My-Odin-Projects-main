@@ -1,3 +1,5 @@
+// import "./DynamicSelect.js";
+
 const myLibrary = [
   {
     title: "Five on a Treasure Island",
@@ -129,7 +131,7 @@ function displayLibrary(myLibrary) {
     const BookImage = document.createElement("img")
     const BookAuthor = document.createElement("p");
     const buttons = document.createElement("div");
-    //const toggleReadDiv = document.createElement("div");
+    const toggleReadDiv = document.createElement("div");
     const BookRead = document.createElement("img");
     const png = document.createElement("img");
 
@@ -139,7 +141,7 @@ function displayLibrary(myLibrary) {
     BookImage.classList.add("book-image")
     BookAuthor.classList.add("author");
     buttons.classList.add("buttons");    
-    //toggleReadDiv.classList.add("toggle-read-container");
+    toggleReadDiv.classList.add("toggle-read-container");
     BookRead.classList.add("toggleRead");
 
     BookTitle.textContent = myLibrary[i].title;
@@ -157,8 +159,7 @@ function displayLibrary(myLibrary) {
     BookCard.appendChild(BookImageDiv)
     BookCard.appendChild(BookAuthor);
     BookCard.appendChild(buttons);
-    //toggleReadDiv.appendChild(readStatus)
-    //toggleReadDiv.appendChild(BookRead)
+    buttons.appendChild(toggleReadDiv);
     buttons.appendChild(BookRead);
     buttons.appendChild(png);
     mainLibrary.appendChild(BookCard);
@@ -182,5 +183,6 @@ function displayLibrary(myLibrary) {
   }
 }
 
+ 
 displayLibrary(myLibrary);
 console.log(myLibrary);
