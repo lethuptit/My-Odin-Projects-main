@@ -17,6 +17,7 @@
         }
 
         .dropText {
+            padding: 0px;
             display: none;
             position: absolute;
             background-color: skyblue;
@@ -31,7 +32,7 @@
             display: block;
         }
 
-        .dropText a:hover {
+        .dropText ul li:hover {
             background-color: blue;
             color: white;
         }
@@ -72,6 +73,96 @@
             background: rgba(255, 255, 0, 0.5);
         }
     </style>
+    <style>
+        .reading-status {
+            display: none;
+        }
+
+        #a {
+            padding-left: 0px;
+        }
+
+        #a img,
+        .btn-select img {
+            width: 12px;
+
+        }
+
+        #a li {
+            list-style: none;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        #a li:hover {
+            background-color: #F4F3F3;
+        }
+
+        #a li img {
+            margin: 5px;
+        }
+
+        #a li span,
+        .btn-select li span {
+            margin-left: 30px;
+        }
+
+        /* item list */
+        .b {
+            display: none;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: 5px;
+        }
+
+        .open {
+            display: show !important;
+        }
+
+        .btn-select {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 350px;
+            height: 34px;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+
+        }
+
+        .btn-select li {
+            list-style: none;
+            float: left;
+            padding-bottom: 0px;
+        }
+
+        .btn-select:hover li {
+            margin-left: 0px;
+        }
+
+        .btn-select:hover {
+            background-color: #F4F3F3;
+            border: 1px solid transparent;
+            box-shadow: inset 0 0px 0px 1px #ccc;
+
+
+        }
+
+        .btn-select:focus {
+            outline: none;
+        }
+
+        .lang-select {
+            margin-left: 50px;
+        }
+    </style>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -80,37 +171,113 @@
         <button class="dropbtn">
             Select any one language
         </button>
-        <div class="dropText" onclick="selectStatus()">
+        <!-- <div class="dropText" onclick="selectStatus()">
             <a href="#">
                 <img src="https://www.tutorialspoint.com/cg/images/cg_python.png" width="20" height="20"> Python</a>
             <a href="#"><img src="https://www.tutorialspoint.com/cg/images/cg_java.png" width="20" height="20">Java</a>
             <a href="#"><img src="https://www.tutorialspoint.com/cg/images/cg_c++.png" width="20" height="20">C+</a>
             <a href="#">
+        </div> -->
+        <div class="dropText">
+            <ul>
+                <li><img src='./images/icons8-book-shelf-94.png' width="20" height="20" /> Test 1</li>
+                <li><img src='./images/icons8-delete.svg' width="20" height="20" /> Test 2</li>
+            </ul>
         </div>
     </div>
 
     <details>
         <summary class="summary"><img src='./images/icons8-moleskine-94.png' /> Testing</summary>
-        <ul onclick="selectStatus()" class="chosing-list">
-            <li><img src='./images/icons8-book-shelf-94.png' /> Test 1</li>
-            <li><img src='./images/icons8-delete.svg' /> Test 2</li>
+        <ul class="chosing-list">
+            <li value="1"><img src='./images/icons8-book-shelf-94.png' /> Test 1</li>
+            <li value="2"><img src='./images/icons8-delete.svg' /> Test 2</li>
         </ul>
     </details>
+    
+    <div class="lang-select">
+        <button class="btn-select" value=""></button>
+        <div class="b">
+            <ul id="a"></ul>
+        </div>
+    
+        <select class="reading-status">
+            <option value="en" class="test"
+                data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/LetterA.svg/2000px-LetterA.svg.png">
+                English</option>
+            <option value="au"
+                data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/NYCS-bull-trans-B.svg/480px-NYCS-bull-trans-B.svg.png">
+                Engllish (AU)</option>
+            <option value="uk" data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Chinese (Simplified)
+            </option>
+            <option value="cn"
+                data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/NYCS-bull-trans-D.svg/2000px-NYCS-bull-trans-D.svg.png">
+                German</option>
+        </select>
+    </div>
 
     <script>
         function selectStatus() {
-
-            dropbtn = document.querySelector(".summary")
+            //selected_li = document.querySelector(".chosing-list li")
             dropText = document.querySelector(".chosing-list")
             dropbtn.textContent = dropText[selected]
         }
-        $('li').click(function (e) {
-
+        $('.chosing-list li').click(function (e) {
             console.log(e.target.innerHTML);
-            dropbtn = document.querySelector(".summary")
-            dropText = document.querySelector(".chosing-list")
-            dropbtn.textContent = dropText[selected]
+
+            // dropbtn = document.querySelector(".summary")
+            // dropText = document.querySelector(".chosing-list")
+            // dropbtn.textContent = dropText[selected]
         })
+
+        //test for getting url value from attr
+        // var img1 = $('.test').attr("data-thumbnail");
+        // console.log(img1);
+
+        //test for iterating over child elements
+        var langArray = [];
+        $('.reading-status option').each(function () {
+            var img = $(this).attr("data-thumbnail");
+            var text = this.innerText;
+            var value = $(this).val();
+            var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
+            langArray.push(item);
+        })
+
+        $('#a').html(langArray);
+
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
+
+        //change button stuff on click
+        $('#a li').click(function () {
+            var img = $(this).find('img').attr("src");
+            var value = $(this).find('img').attr('value');
+            var text = this.innerText;
+            var item = '<li><img src="' + img + '" alt="" /><span>' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+            $(".b").toggle();
+            console.log(value);
+        });
+
+        $(".btn-select").click(function () {
+            $(".b").toggle();
+        });
+
+        //check local storage for the lang
+        var sessionLang = localStorage.getItem('lang');
+        if (sessionLang) {
+            //find an item with value of sessionLang
+            var langIndex = langArray.indexOf(sessionLang);
+            $('.btn-select').html(langArray[langIndex]);
+            $('.btn-select').attr('value', sessionLang);
+        } else {
+            var langIndex = langArray.indexOf('ch');
+            console.log(langIndex);
+            $('.btn-select').html(langArray[langIndex]);
+            //$('.btn-select').attr('value', 'en');
+        }
     </script>
 </body>
 
