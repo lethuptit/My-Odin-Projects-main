@@ -40,9 +40,9 @@ img {
   width: 24px;
   transition: 0.3s ease;
 }
-img:hover {
+/* img:hover {
   transform: scale(1.1);
-}
+} */
 
 .header {
   background-color: #e6e7e5;
@@ -251,7 +251,8 @@ input:focus {
 }
 
 .mainLibrary {
-  margin: 50px 5%;  
+  margin: 20px 5%;  
+  padding:20px 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 300px));
   grid-auto-rows: 270px;
@@ -274,6 +275,7 @@ input:focus {
   justify-content: space-around;
   box-shadow: 0px 6px 6px 0px rgb(32, 32, 32);
   transition: 0.3s transform ease;
+  
   overflow: overflow;
   /* Add this line */
 }
