@@ -23,45 +23,47 @@
             </button>
         </div>
         <div class="backdrop" id="backdrop">
-        <div class="popup-container" id="add-book-popup">
-            <div>
-                <h2 id="insert-book-title-popup">Add a new book</h2>
-            </div>
-            <div>
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" placeholder="Book's title" required />
-            </div>
-            <div>
-                <label for="author">Author</label>
-                <input type="text" id="author" name="author" placeholder="Book's author" required />
-            </div>
-            <div>
-                <label for="pages">Pages</label>
-                <input type="number" id="pages" name="pages" placeholder="Book's pages" required />
-            </div>
-            <div class="switch-container">
-                <p>Read</p>
-                <input type="checkbox" id="read" name="read" class="toggle" />
-                <label for="read" class="switch"></label>
-            </div>
+            <!-- <dialog id="add-book-dialog"> -->
+            <form class="popup-container" id="add-book-popup" action="">
+                <div>
+                    <h2 id="insert-book-title-popup">Add a new book</h2>
+                </div>
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Book's title" required />
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" placeholder="Book's author" required />
+                </div>
+                <div>
+                    <label for="pages">Pages</label>
+                    <input type="number" id="pages" name="pages" placeholder="Book's pages" required />
+                </div>
+                <div class="switch-container">
+                    <p>Read</p>
+                    <input type="checkbox" id="read" name="read" class="toggle" />
+                    <label for="read" class="switch"></label>
+                </div>
 
-            <div class="button-container">
-                <button type="button" id="submit" type="submit">
-                    Submit
-                </button>
-                <button type="button" id="cancel" onclick="cancelBook()">
-                    Cancel
-                </button>
-            </div>
-            <!-- <div>
+                <div class="button-container">
+                    <button type="button" id="submit" type="submit">
+                        Submit
+                    </button>
+                    <button type="button" id="cancel" onclick="cancelBook()">
+                        Cancel
+                    </button>
+                </div>
+                <!-- <div>
                     <select id="country" name="country" data-placeholder="Select a country" data-dynamic-select>
                         <option value="0" data-img="./images/icons8-moleskine-94.png">Unread</option>
                         <option value="2" data-img="./images/icons8-moleskine-94.png">In progress</option>
                         <option value="1" data-img="./images/icons8-moleskine-94.png">Read</option>
                     </select>
             <   /div> -->
+            </form>
+        <!-- </dialog> -->
         </div>
-    </div>
     </div>
     <!-- <div class="backdrop" id="backdrop"></div> -->
     <div class="mainLibrary">

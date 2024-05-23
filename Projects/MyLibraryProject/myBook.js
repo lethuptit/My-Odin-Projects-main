@@ -45,36 +45,35 @@ document.getElementById("submit").addEventListener("click", function (event) {
   event.preventDefault();
 
   // Get input values
+  const form = document.querySelector("form");
   const title = document.getElementById("title").value.trim();
   const author = document.getElementById("author").value;
   const pages = parseInt(document.getElementById("pages").value, 10); // Convert to integer
   const read = document.getElementById("read").checked==true?1:0
-
-  // Call your function (assuming you have an 'addBookToLibrary' function)
-  // Check if the book already exists in the library
-  for (let i = 0; i < myLibrary.length; i++) {
-    if (myLibrary[i].title === title && myLibrary[i].author === author) {
-      alert("This book already exists in the library.");
+  if(form.reportValidity()){
+    
+    // Check if the book already exists in the library
+    for (let i = 0; i < myLibrary.length; i++) {
+      if (myLibrary[i].title === title && myLibrary[i].author === author) {
+        alert("This book already exists in the library.");
+        return;
+      }
+    }
+    // Add validation for title length and number of pages
+    if (title.length > 50) {
+      alert("Title is too long. Please limit it to 50 characters or less.");
       return;
     }
-  }
-  // Add validation for title length and number of pages
-  if (title.length > 50) {
-    alert("Title is too long. Please limit it to 50 characters or less.");
-    return;
-  }
 
-  if (author.length > 50) {
-    alert("Author name is too long. Please limit it to 50 characters or less.");
-    return;
-  }  
-
-  if (title=="" || author =="") {
-    alert("Please enter title and author...")
-    return;
+    if (author.length > 50) {
+      alert("Author name is too long. Please limit it to 50 characters or less.");
+      return;
+    }  
+  
+    // Call your function (assuming you have an 'addBookToLibrary' function)
+    addBookToLibrary(title, author, pages, read);
   }
-
-  addBookToLibrary(title, author, pages, read);
+  
 });
 
 // Constructor for Book
