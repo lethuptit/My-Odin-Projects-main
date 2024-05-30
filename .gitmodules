@@ -1,0 +1,6 @@
+[submodule "css-exercises"]
+	path = css-exercises
+	url = git@github.com:lethuptit/css-exercises.git
+[submodule "javascript-exercises"]
+	path = javascript-exercises
+	url = git@github.com:lethuptit/javascript-exercises.git
