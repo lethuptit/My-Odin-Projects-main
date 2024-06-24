@@ -33,3 +33,7 @@ function toggleConfirmPasswordVisibility() {
   confirmPasswordInput.type = (confirmPasswordInput.type === "password") ? "text" : "password";
 
 }
+
+var first = document.querySelector('body').chilrend[0];
+first.innerHTML = 'BROWN BEARS ARE AWESOME!';
+var elementToRemove = document.querySelector('#vespa');
