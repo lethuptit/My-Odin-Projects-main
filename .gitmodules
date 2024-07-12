@@ -4,3 +4,9 @@
 [submodule "javascript-exercises"]
 	path = javascript-exercises
 	url = git@github.com:lethuptit/javascript-exercises.git
+[submodule "react-sample"]
+	path = react-sample
+	url = https://github.com/lethuptit/react-sample.git
+[submodule "react-examples"]
+	path = react-examples
+	url = https://github.com/lethuptit/react-examples.git
