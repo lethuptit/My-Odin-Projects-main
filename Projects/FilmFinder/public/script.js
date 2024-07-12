@@ -7,10 +7,10 @@ const getGenres = async () => {
   const requestParams = `?api_key=${tmdbKey}`
   const urlToFetch = tmdbBaseUrl+genreRequestEndpoint+requestParams
   try{
-    const response = await fetch(urlToFetch);
+    const response = await fetch(urlToFetch)
     if(response.ok){
-      const jsonResponse = await response.json();
-      console.log(jsonResponse)
+      const jsonResponse = await response.json()
+      console.log(response )
       var genres = jsonResponse.genres
       return genres
     }
@@ -28,7 +28,7 @@ const getMovies = async () => {
     const response = await fetch(urlToFetch)
     if(response.ok){
       const jsonResponse = await response.json()
-      console.log(jsonResponse )
+      console.log(response )
       var movies  = jsonResponse.results
       return movies
     }
@@ -37,7 +37,7 @@ const getMovies = async () => {
   }
 };
 //getMovies()
-const getMovieInfo = async(movie) => {
+const getMovieInfo = async (movie) => {
   let movieId = movie.id
 
   const movieEndpoint = `/movie/${movieId}`
@@ -47,7 +47,7 @@ const getMovieInfo = async(movie) => {
     const response = await fetch(urlToFetch)
     if(response.ok){
       const movieInfo = await response.json()
-      console.log(jsonResponse )
+      console.log(response )
       return movieInfo
     }
   }catch(error){
@@ -63,7 +63,7 @@ const showRandomMovie = async() => {
   };
   const movies = await getMovies()
 
-  const randomMovie =await getRandomMovie(movies)
+  const randomMovie = await getRandomMovie(movies)
   const info = await getMovieInfo(randomMovie)
   displayMovie(info)
 
