@@ -1,0 +1,77 @@
+{
+  "name": "Safe-Queue-Web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@material-ui/core": "^4.10.1",
+    "@mui/material": "^5.16.1",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "AsyncStorage": "^0.1.5",
+    "buffer": "^6.0.3",
+    "dotenv": "^16.4.5",
+    "eth-qr-scanner": "^1.1.0",
+    "express": "^4.19.2",
+    "filepond": "^4.31.1",
+    "filepond-plugin-image-crop": "^2.0.6",
+    "filepond-plugin-image-edit": "^1.6.3",
+    "filepond-plugin-image-exif-orientation": "^1.0.11",
+    "filepond-plugin-image-preview": "^4.6.12",
+    "filepond-plugin-image-resize": "^2.0.10",
+    "filepond-plugin-image-transform": "^3.8.7",
+    "firebase": "^10.12.3",
+    "flatlist-react": "^1.5.14",
+    "material-ui-phone-number": "^3.0.0",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
+    "onsenui": "^2.12.8",
+    "qrcode.react": "^3.1.0",
+    "react": "^18.3.1",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^18.3.1",
+    "react-filepond": "^7.1.2",
+    "react-image-crop": "^11.0.6",
+    "react-moment": "^1.1.3",
+    "react-native-web": "^0.19.12",
+    "react-onsenui": "^1.13.3",
+    "react-page-visibility": "^7.0.0",
+    "react-qr-reader": "^2.2.1",
+    "react-qr-reader2": "^1.1.0",
+    "react-qr-scanner": "0.0.11",
+    "react-router-dom": "^6.24.1",
+    "react-scripts": "5.0.1",
+    "react-spinkit": "^3.0.0",
+    "whatwg-fetch": "^3.6.20"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "start-web": "react-scripts start",
+    "build-web": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build-prd": "cross-env GENERATE_SOURCEMAP=false react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "cross-env": "^7.0.3"
+  }
+}

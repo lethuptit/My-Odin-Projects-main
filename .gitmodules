@@ -10,9 +10,9 @@
 [submodule "react-examples"]
 	path = react-examples
 	url = https://github.com/lethuptit/react-examples.git
-[submodule "Projects/queue-app"]
-	path = Projects/queue-app
+[submodule "Capstones/queue-app"]
+	path = Capstones/queue-app
 	url = https://github.com/nageeb-damani/queue-app.git
-[submodule "Projects/My-Queue"]
-	path = Projects/My-Queue
+[submodule "Capstones/My-Queue"]
+	path = Capstones/My-Queue
 	url = https://github.com/lethuptit/My-Queue.git

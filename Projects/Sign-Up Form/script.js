@@ -11,7 +11,9 @@ const firebaseConfig = {
 };
 //init firebase
 const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth()// const auth = firebase.auth()
+const auth = firebase.auth()
+let CUR_QOUTE;
+var CUR_USER;
 
 function validatePass() {
   let password = document.getElementById("password")
@@ -22,13 +24,12 @@ function validatePass() {
     password.classList.add('error')
     confirmPassword.classList.add('error')
     errorMessage.textContent = "* Passwords do not match";
-    // button.disabled = true;
 
   } else {
     password.classList.remove('error')
     confirmPassword.classList.remove('error')
     errorMessage.textContent = "";
-    // button.disabled = false;
+
   }
 }
 
@@ -127,14 +128,16 @@ function getErrorMessage(e) {
 
 function signupUser(obj) {
   // create user
+
   firebase.auth().createUserWithEmailAndPassword(obj.email, obj.password).then((cred) => {
+    $('.login-container').hide();
     const uid = cred.user.uid
     saveUserProfile(obj, uid);
+
+  }).catch((error) => {//FirebaseError
+    console.log("Sign up error.", error)
+    alert(getErrorMessage(error));
   })
-    .catch((error) => {//FirebaseError
-      console.log("Sign up error.", error)
-      alert(getErrorMessage(error));
-    })
 }
 
 function saveUserProfile(obj, uid) {
@@ -149,8 +152,8 @@ function saveUserProfile(obj, uid) {
       creationDate: d1.toUTCString()
     })
     .then(() => {
-      alert("Your registration is sucessful. Please login!")
-      resetFormData()
+      alert("Your registration is sucessful. You logged in!")
+      afterSignIn(uid)
     }).catch((error) => {
       console.log("Save user profile error.", error.message)
       throw error;
@@ -177,67 +180,171 @@ function submitFormData(e) {
   }
 }
 
-function calcBithdayLeft(uid) {
+function showContent(user) {
+  if (user) {
+    let today = new Date();
+    var dayInMs = 24 * 60 * 60 * 1000;
+    var nextBirthdate = new Date(today.getFullYear(), user.birthdate.getMonth(), user.birthdate.getDate());
+    if (today - nextBirthdate > dayInMs) {
+      nextBirthdate = new Date(today.getFullYear() + 1, user.birthdate.getMonth(), user.birthdate.getDate())
+    }
+    console.log(user.birthdate, nextBirthdate)
+    const dayLeft = Math.ceil((nextBirthdate - today) / (dayInMs));
+
+    $('#right-container').hide();
+
+    if (dayLeft === 0) {
+      showQuote();
+      $('.nonbirthday-content').hide();
+      $('.birthday-content h2').text(`Happy birthday, ${user.name}!`);
+      $('.birthday-content').show();
+
+    }
+    else {
+      $('.birthday-content').hide();
+      $('.nonbirthday-content h2').text(`Hello, ${user.name}!`);
+      $('.nonbirthday-content h3').text(`${dayLeft} DAY(S) LEFT`);      // Append the new elements    
+      $('.nonbirthday-content p').text('UNTIL YOUR BIRTHDAY!');
+      $('.nonbirthday-content').show();
+
+
+    }
+    $('.login-container').fadeIn('slow');
+  }
+}
+
+var QUOTES = []
+function fetchData() {
+
+  if (QUOTES.length === 0) {
+    //Fetch quote
+    const url = QUOTE_ENDPOINT;
+    fetch(url).then((prom) => {
+      if (prom.ok) {
+        const jsonResponse = prom.json()
+        //console.log(jsonResponse)
+        QOUTES = (jsonResponse);
+      }
+    }, (error => {
+      console.log("Request failed.", error)
+      throw new Error("Fetching quote error.")
+    }))
+  }
+
+  //Fecth User Info
   const ref = firebase.database().ref('users/' + uid + "/profile");
   ref.get().then((snapshot) => {
-    try {
-      let bdate = (snapshot.val().birthDate).split('-')
-      const birthdate = new Date(bdate[0], bdate[1]-1, bdate[2])
-      let name = snapshot.val().userName;
-      let today = new Date();
-      var dayInMs = 24 * 60 * 60 * 1000;
-      var nextBirthdate = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
-      if (nextBirthdate + dayInMs < today) {
-        nextBirthdate = new Date(today.getFullYear() + 1, birthdate.getMonth(), birthdate.getDate())
-      }
-
-
-      
-      const dayLeft =  nextBirthdate - today;
-      if (dayLeft <= 0) {
-        $('.login-content h2').text(`Happy Birthday, ${name}!`);     
-        fetch_quote();
-      }
-      else {
-        
-        
-        
-        
-      }
-
-      $('#right-container').hide();
-      $('.login-content').slideDown('slow');
-
-    } catch (e) {
-      throw ('The calculation of birthdate failed in: ' + e);
-    }
+    showUserContent(snapshot);
   }, (errorObject) => {
-    console.log(  )
-    throw ('The reading action failed in: ' + errorObject.name);
+    console.log(errorObject)
+    reject('Reading Firebase failed in: ' + errorObject.name); s
   });
 }
 
-async function fetch_quote()
-{
-  const url = QUOTE_ENDPOINT
-  const prom = await fetch(url)
-  if(prom.ok){
-      const jsonResponse = await prom.json ()
-      //console.log('Data from async function:')
-      console.log(jsonResponse.data)
-      return jsonResponse.data
+function showUserContent(snapshot) {
+  try {
+    let bdate = (snapshot.val().birthDate).split('-')
+    let birthdate = new Date(bdate[0], bdate[1] - 1, bdate[2]);
+    const user = { name: snapshot.val().userName, birthdate: birthdate };
+    showContent(user)
+
+  } catch (e) {
+    console.log('Catch Error:', e)
+    throw ('Convert birthdate failed in: ' + e);
   }
-  console.log("Fetching error")
-  throw new Error("Fetching error")
 }
+
+function afterSignIn(uid) {
+  const ref = firebase.database().ref('users/' + uid + "/profile");
+  ref.get().then((snapshot) => {
+    try {
+
+      let bdate = (snapshot.val().birthDate).split('-')
+      let birthdate = new Date(bdate[0], bdate[1] - 1, bdate[2]);
+      const user = { name: snapshot.val().userName, birthdate: birthdate };
+      showContent(user)
+
+    } catch (e) {
+      console.log('Catch Error:', e)
+      throw ('Convert birthdate failed in: ' + e);
+    }
+  }, (errorObject) => {
+    console.log(errorObject)
+    throw ('Reading Firebase failed in: ' + errorObject.name); s
+  });
+}
+
+function setQuote(quote) {
+  if (quote) {
+    $('#quote').text(`"${quote.text}"`);
+    $('#author').text(quote.author);
+    $('#author').css({ "font-style": "italic", color: 'gray', 'font-size': '12px' })
+  }
+}
+
+function fetchQuote() {
+  return new Promise((resolve, reject) => {
+    const url = QUOTE_ENDPOINT;
+    fetch(url).then((prom) => {
+      if (prom.ok) {
+        const jsonResponse = prom.json()
+        //console.log(jsonResponse)
+        resolve(jsonResponse);
+      }
+      else {
+        console.log("Request failed.")
+        reject("Fetching quote error.")
+        //throw new Erro("Fetching quote error.")
+      }
+    })
+  })
+}
+
+async function showQuote() {
+  if (QUOTES.length === 0) {
+    const url = QUOTE_ENDPOINT;
+    const prom = await fetch(url);
+    if (prom.ok) {
+      const jsonResponse = await prom.json()
+      //console.log(jsonResponse)
+      let quote = jsonResponse[Math.ceil(Math.random() * jsonResponse.length)];
+      console.log(quote)
+      setQuote(quote);
+      $('.login-container').fadeIn('slow');
+    }
+    else {
+      console.log("Fetching quote error")
+      alert("Fetching quote error.")
+    }
+  }
+  else {
+    let quote = QUOTES[Math.ceil(Math.random() * QUOTES.length)];
+    console.log(quote)
+    setQuote(quote);
+  }
+
+}
+
+function fetchUserInfo() {
+  return new Promise((resolve, reject) => {
+    const ref = firebase.database().ref('users/' + uid + "/profile");
+    ref.get().then((snapshot) => {
+      resolve(snapshot.val())
+    }, (errorObject) => {
+      console.log(errorObject)
+      reject('Reading Firebase failed in: ' + errorObject.name); s
+    });
+  });
+}
+
 
 function signinUser(email, password) {
 
   auth.signInWithEmailAndPassword(email, password).then((credVal) => {
+    $('.login-container').hide();
     console.log("User is logged in with id: ", credVal.user.uid)
-
-    calcBithdayLeft(credVal.user.uid)
-    
+    afterSignIn(credVal.user.uid);
+    //fetchData();
 
   }).catch(function (error) {
     console.log("error", error)
@@ -246,6 +353,23 @@ function signinUser(email, password) {
 }
 
 $(document).ready(() => {
+
+  firebase.auth().onAuthStateChanged(function (loginUser) {
+    $('#right-container').hide()
+    $('.login-container').hide();
+    if (loginUser) {
+      // User is signed in.
+      $('#right-container').hide()
+      $('.login-container').show()
+
+      afterSignIn(loginUser.uid);
+    } else {
+      // User is not signed in.
+      $('#right-container').show()
+      $('.login-container').hide();
+    }
+  });
+
   resetFormData();
 
   $('#signup-form').on('submit', submitFormData);
@@ -282,8 +406,46 @@ $(document).ready(() => {
   $('#loginBtn').on('click', () => {
     $('#right-container').removeClass("right-panel-active");
     $('.backdrop').removeClass("right-panel-active");
+  });
 
+  $('#logoutBtn').on('click', () => {
 
+    firebase.auth().signOut().then(() => {
+      console.log('Logout successfully.')
+      $('.login-container').hide();
+      $('#right-container').hide();
+      $('#right-container').fadeIn('slow');
+    }).catch((error) => {
+      console.log("Logout error!", error)// An error happened.
+    });
+  });
 
+  $('#google-signin').on('click', () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+        console.log(result.user);
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+        // ...
+      }).catch((error) => {
+
+        console.log(error)
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
   });
 })
