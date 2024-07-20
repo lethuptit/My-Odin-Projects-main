@@ -4,15 +4,10 @@
 [submodule "javascript-exercises"]
 	path = javascript-exercises
 	url = git@github.com:lethuptit/javascript-exercises.git
-[submodule "react-sample"]
-	path = react-sample
-	url = https://github.com/lethuptit/react-sample.git
-[submodule "react-examples"]
-	path = react-examples
-	url = https://github.com/lethuptit/react-examples.git
-[submodule "Capstones/queue-app"]
-	path = Capstones/queue-app
+
+[submodule "Projects/queue-app"]
+	path = Projects/queue-app
 	url = https://github.com/nageeb-damani/queue-app.git
-[submodule "Capstones/My-Queue"]
-	path = Capstones/My-Queue
+[submodule "Projects/My-Queue"]
+	path = Projects/My-Queue
 	url = https://github.com/lethuptit/My-Queue.git
