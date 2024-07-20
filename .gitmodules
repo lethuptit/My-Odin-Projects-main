@@ -11,3 +11,6 @@
 [submodule "Projects/My-Queue"]
 	path = Projects/My-Queue
 	url = https://github.com/lethuptit/My-Queue.git
+[submodule "Capstone/My-Queue"]
+	path = Capstone/My-Queue
+	url = https://github.com/lethuptit/My-Queue.git
