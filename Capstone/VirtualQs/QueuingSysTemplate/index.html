@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Queuing-System</title>
+      <!-- Google Font: Source Sans Pro -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="asset/fontawesome/css/all.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="asset/css/adminlte.min.css">
+      <link rel="stylesheet" href="asset/css/style.css">
+<style>
+body{
+   background-color: rgb(190, 188, 188);
+}
+    video {
+  width: 100%    !important;
+  height: 80vh   !important;
+        object-fit: cover; // use "cover" to avoid distortion
+        position: absolute;
+        border: 3px solid rgb(48,133,142);
+        border-radius: 3px;
+    }
+
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+  height: 80vh   !important;
+}
+
+td, th {
+  border: 2px solid #dddddd;
+  color: #fff;
+      font-family: fantasy !important;
+      letter-spacing: 2px;
+  text-align: center;
+  padding: 8px;
+  font-size: 25px;
+  background-color: rgb(48,133,142);
+}
+td.active{
+   background-color: rgb(190, 188, 188);
+}
+</style>
+   </head>
+   <body>
+      <section class="content">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="info-box">
+                        <marquee><h1 class="txt-color">NOW SERVING</h1></marquee>
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <table>
+ <tr>
+     <th>Counter</th>
+    <th>Ticket</th>  
+ </tr>
+  <tr>
+    <td>1</td>
+    <td>TLL 0201</td>
+  </tr>
+  <tr>
+    <td class="active">2</td>
+    <td class="active">TLL 0202</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>TLL 0203</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>TLL 0204</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>TLL 0205</td>
+  </tr>
+</table>
+                  </div>
+                  <div class="col-lg-6">
+<video src="asset/img/mov_bbb.mp4" autoplay muted loop></video>
+                  </div>
+
+                  <div class="col-lg-12">
+                     <div class="info-box" style="background-color: rgb(48,133,142);">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+   </body>
+</html>
